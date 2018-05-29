@@ -1,4 +1,4 @@
-package cl.magnet.mobileappsexample;
+package cl.magnet.mobileappsexample.db;
 
 import android.content.Context;
 import android.content.SharedPreferences;

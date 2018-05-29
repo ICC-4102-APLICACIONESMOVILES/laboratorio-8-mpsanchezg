@@ -1,11 +1,9 @@
 package cl.magnet.mobileappsexample;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,19 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.LinkedList;
-import java.util.List;
-
+import cl.magnet.mobileappsexample.db.CredentialsManager;
 import cl.magnet.mobileappsexample.db.Form;
-import cl.magnet.mobileappsexample.db.FormViewModel;
-import cl.magnet.mobileappsexample.network.NetworkManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FormsListFragment.OnListFragmentInteractionListener {
@@ -106,6 +93,13 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            FormsListFragment addFormFragment = new FormsListFragment();
+            addFormFragment.setArguments(getIntent().getExtras());
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.content_main_frameLayout, addFormFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -113,10 +107,15 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.add_form) {
+            AddFormFragment addFormFragment = new AddFormFragment();
+            addFormFragment.setArguments(getIntent().getExtras());
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.content_main_frameLayout, addFormFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
