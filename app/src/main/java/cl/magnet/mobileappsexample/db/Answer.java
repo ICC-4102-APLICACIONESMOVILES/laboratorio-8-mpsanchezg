@@ -13,15 +13,39 @@ public class Answer {
     @PrimaryKey
     private int aid;
 
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "answer")
     private String answer;
 
-    @ForeignKey(entity = Question.class, parentColumns = "FormID", childColumns = "FormID")
+    @ForeignKey(entity = Question.class, parentColumns = "QuestionID", childColumns = "QuestionID")
     private int questionId;
 
-    public Answer(int qid, String name, int getUid) {
-        this.aid = qid;
-        this.answer = name;
-        this.questionId = getUid;
+    public Answer(int aid, String answer, int questionId) {
+        this.aid = aid;
+        this.answer = answer;
+        this.questionId = questionId;
+    }
+
+    public int getAid() {
+        return aid;
+    }
+
+    public void setAid(int aid) {
+        this.aid = aid;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
     }
 }
